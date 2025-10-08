@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Flappy Bird Clone</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="gameCanvas" aria-label="Flappy Bird Game" role="img"></canvas>
+
+    <div class="hud" aria-live="polite">
+        <div class="hud__score" id="score">0</div>
+        <div class="hud__best">Best: <span id="bestScore">0</span></div>
+    </div>
+
+    <div class="overlay overlay--visible" id="startOverlay">
+        <div class="overlay__box">
+            <h1 class="overlay__title">Flappy Bird</h1>
+            <p class="overlay__subtitle">Tap, click, or press Space to flap</p>
+            <p class="overlay__hint">Stay between the pipes and beat your high score!</p>
+        </div>
+    </div>
+
+    <div class="overlay" id="gameOverOverlay" aria-hidden="true">
+        <div class="overlay__box">
+            <h2 class="overlay__title">Game Over</h2>
+            <p class="overlay__subtitle">Score: <span id="finalScore">0</span></p>
+            <p class="overlay__subtitle">Best: <span id="finalBestScore">0</span></p>
+            <button type="button" id="restartBtn" class="overlay__button">Play Again</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
