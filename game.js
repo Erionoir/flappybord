@@ -691,6 +691,7 @@ function drawBird() {
 function handlePrimaryAction(event) {
     if (event) {
         event.preventDefault();
+        event.stopPropagation();
     }
 
     if (state.phase === 'ready') {
@@ -705,6 +706,7 @@ function handlePrimaryAction(event) {
 
     if (state.phase === 'over') {
         startGame();
+        return;
     }
 }
 
@@ -742,8 +744,11 @@ window.addEventListener('resize', () => {
 });
 
 canvas.addEventListener('pointerdown', handlePrimaryAction, { passive: false });
+canvas.addEventListener('touchstart', handlePrimaryAction, { passive: false });
+canvas.addEventListener('click', handlePrimaryAction, { passive: false });
 document.addEventListener('keydown', onKeyDown, { passive: false });
 restartBtn.addEventListener('pointerdown', handlePrimaryAction, { passive: false });
+restartBtn.addEventListener('touchstart', handlePrimaryAction, { passive: false });
 restartBtn.addEventListener('click', handlePrimaryAction, { passive: false });
 
 init();
