@@ -93,8 +93,8 @@ function updateDerivedMetrics() {
 
     state.metrics.groundHeight = Math.max(48, height * 0.11);
     state.metrics.groundY = height - state.metrics.groundHeight;
-    state.metrics.pipeGap = Math.max(180, height * 0.32);
-    state.metrics.pipeWidth = Math.max(44, width * 0.09);
+    state.metrics.pipeGap = Math.max(190, height * 0.35);  // Slightly larger gap
+    state.metrics.pipeWidth = Math.max(40, width * 0.08);  // Slightly narrower pipes
     // Much slower pipe speed for easier control
     state.metrics.pipeSpeed = Math.max(120, width * 0.22);
     state.metrics.spawnInterval = 1.4;
