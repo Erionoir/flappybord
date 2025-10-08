@@ -101,7 +101,7 @@ function updateDerivedMetrics() {
     state.metrics.birdWidth = state.metrics.birdHeight * 1.25;
 
     state.physics.gravity = height * 5.6;
-    state.physics.jumpVelocity = -height * 1.95;
+    state.physics.jumpVelocity = -height * 1.4;
     state.physics.maxFallSpeed = height * 3.3;
 
     state.bird.width = state.metrics.birdWidth;
