@@ -28,7 +28,7 @@ const state = {
         gravity: 0,
         jumpVelocity: 0,
         maxFallSpeed: 0,
-        rotationUp: -0.5,
+        rotationUp: -0.35,  // Gentler upward tilt
         rotationDown: 0.85
     },
     metrics: {
@@ -95,14 +95,16 @@ function updateDerivedMetrics() {
     state.metrics.groundY = height - state.metrics.groundHeight;
     state.metrics.pipeGap = Math.max(180, height * 0.32);
     state.metrics.pipeWidth = Math.max(44, width * 0.09);
-    state.metrics.pipeSpeed = Math.max(200, width * 0.34);
+    // Much slower pipe speed for easier control
+    state.metrics.pipeSpeed = Math.max(120, width * 0.22);
     state.metrics.spawnInterval = 1.4;
     state.metrics.birdHeight = Math.max(28, height * 0.06);
     state.metrics.birdWidth = state.metrics.birdHeight * 1.25;
 
-    state.physics.gravity = height * 5.6;
-    state.physics.jumpVelocity = -height * 1.4;
-    state.physics.maxFallSpeed = height * 3.3;
+    // More responsive gravity and movement
+    state.physics.gravity = height * 3.5;  // Increased from 2.8 for better pull
+    state.physics.jumpVelocity = -height * 0.95;  // Even smaller jump
+    state.physics.maxFallSpeed = height * 2.8;  // Reasonable fall speed
 
     state.bird.width = state.metrics.birdWidth;
     state.bird.height = state.metrics.birdHeight;
@@ -226,9 +228,10 @@ function updateParallax(delta) {
     }
 
     const { pipeSpeed, width } = state.metrics;
+    const tileWidth = Math.max(24, width * 0.06);
     state.background.parallax.far = (state.background.parallax.far + pipeSpeed * 0.12 * delta) % width;
     state.background.parallax.mid = (state.background.parallax.mid + pipeSpeed * 0.22 * delta) % width;
-    state.groundOffset = (state.groundOffset + pipeSpeed * delta) % width;
+    state.groundOffset = (state.groundOffset + pipeSpeed * delta) % tileWidth;
 }
 
 function setPhase(nextPhase) {
@@ -642,7 +645,7 @@ function drawGround() {
 
     const tileWidth = Math.max(24, width * 0.06);
     ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
-    for (let x = -tileWidth + (state.groundOffset % tileWidth); x < width + tileWidth; x += tileWidth) {
+    for (let x = -tileWidth - (state.groundOffset % tileWidth); x < width + tileWidth; x += tileWidth) {
         ctx.fillRect(x, groundY + groundHeight * 0.55, tileWidth * 0.5, tileWidth * 0.35);
     }
 
